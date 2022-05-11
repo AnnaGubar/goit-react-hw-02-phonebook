@@ -3,16 +3,15 @@ import React from 'react';
 // import s from './Section.module.css';
 
 function ContactList({ contactName }) {
-  console.log(contactName);
   return (
     <ul>
-      <li>{contactName}</li>
+      {contactName &&
+        contactName.map(({ id, name, number }) => (
+          <li key={id}>
+            {name}: {number}
+          </li>
+        ))}
     </ul>
-    // <ul>
-    //   {contactName.map(({ name }) => (
-    //     <li key={name}>{name}</li>
-    //   ))}
-    // </ul>
   );
 }
 
@@ -22,14 +21,3 @@ function ContactList({ contactName }) {
 // };
 
 export default ContactList;
-
-// {
-//   options.map(({ label, color }, index) => (
-//     <button
-//       key={label}
-//       className={this.makeOptionClassName(index)}
-//       style={{ backgroundColor: color }}
-//       onClick={() => this.setActiveIdx(index)}
-//     ></button>
-//   ));
-// }

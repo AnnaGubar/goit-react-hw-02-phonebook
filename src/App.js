@@ -1,36 +1,53 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 import Section from './Components/Section';
 import ContactForm from './Components/ContactForm';
 import ContactList from './Components/ContactList';
 
 class App extends Component {
   state = {
-    contacts: [],
     name: '',
+    number: '',
+    contacts: [],
+    filter: '',
   };
 
-  // добавление имени
-  getFormresults = newName => {
-    this.setState({
-      name: newName, // newName получает из дочернего ел.
-    });
+  updateStateApp = newName => {
+    const contact = {
+      id: nanoid(),
+      name: newName.name,
+      number: newName.number,
+    };
+
+    this.setState(({ contacts }) => ({
+      name: newName.name,
+      number: newName.number,
+      contacts: [contact, ...contacts],
+    }));
   };
 
   render() {
+    // console.group('🔅 PROPS');
     // console.log('parent', this.state);
     // console.log('parent', this.props);
+    // console.groupEnd();
+
+    console.group('🔅 STATE');
     console.log(this.state);
-    console.log(this.state.name);
+    console.log('name', this.state.name);
+    console.log('contacts', this.state.contacts);
+    console.groupEnd();
+
     return (
       <>
         <Section title="Phonebook">
           <ContactForm
             stateProps={this.state}
-            getFormresults={this.getFormresults}
+            getFormresults={this.updateStateApp}
           />
         </Section>
         <Section title="Contacts">
-          <ContactList contactName={'ggggggggg'} />
+          <ContactList contactName={this.state.contacts} />
         </Section>
       </>
     );
