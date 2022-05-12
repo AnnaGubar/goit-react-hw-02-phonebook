@@ -30,13 +30,14 @@ class App extends Component {
     this.handleUniqueListContacts(contact);
   };
 
-  // Filter
+  // FilterValue
   handleSearch = searchValue => {
     this.setState({
       filter: searchValue.filter,
     });
   };
 
+  // UniqueListContacts
   handleUniqueListContacts(contact) {
     this.setState(() => ({
       contacts: [contact, ...uniqueContacts],
@@ -53,6 +54,18 @@ class App extends Component {
       return listContact;
     });
   }
+
+  deleteContact = e => {
+    const contactToDelete = e.currentTarget.parentNode.firstChild.textContent;
+    // console.log(contactToDelete);
+    // console.log(this.state.contacts);
+
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(
+        todo => todo.name !== contactToDelete,
+      ),
+    }));
+  };
 
   render() {
     // console.group('🔅 STATE');
@@ -75,6 +88,7 @@ class App extends Component {
           <ContactList
             contactName={this.state.contacts}
             filtredValue={this.state.filter}
+            deleteContact={this.deleteContact}
           />
         </Section>
       </>
