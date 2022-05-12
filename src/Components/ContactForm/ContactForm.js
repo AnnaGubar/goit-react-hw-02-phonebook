@@ -6,10 +6,17 @@ class ContactForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
+    console.log(this.props);
+    let enteredNameContact = e.target.elements.name;
+    let enteredPnoneNumber = e.target.elements.number;
+
     this.props.updateStateApp({
-      name: e.target.elements.name.value,
-      number: e.target.elements.number.value,
+      name: enteredNameContact.value,
+      number: enteredPnoneNumber.value,
     });
+
+    enteredNameContact.value = '';
+    enteredPnoneNumber.value = '';
   };
 
   render() {
