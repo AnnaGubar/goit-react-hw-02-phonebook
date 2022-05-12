@@ -1,16 +1,23 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-// import s from './Section.module.css';
+import s from './ContactList.module.css';
 
-function ContactList({ contactName }) {
+function ContactList({ contactName, filtredValue }) {
+  // console.log(contactName);
+  // console.log(filtredValue);
+
   return (
-    <ul>
+    <ul className={s.list}>
       {contactName &&
-        contactName.map(({ id, name, number }) => (
-          <li key={id}>
-            {name}: {number}
-          </li>
-        ))}
+        contactName
+          .filter(contact =>
+            contact.name.toLowerCase().trim().includes(filtredValue),
+          )
+          .map(({ id, name, number }) => (
+            <li key={id}>
+              {name}: {number}
+            </li>
+          ))}
     </ul>
   );
 }

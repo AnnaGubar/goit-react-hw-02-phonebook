@@ -6,15 +6,17 @@ class ContactForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.getFormresults({
+    this.props.updateStateApp({
       name: e.target.elements.name.value,
       number: e.target.elements.number.value,
     });
   };
 
   render() {
-    // console.log('child', this.state);
-    // console.log('child', this.props);
+    // console.group('🔅 PROPS');
+    // console.log('parent', this.state);
+    // console.log('parent', this.props);
+    // console.groupEnd();
 
     return (
       <form className={s.form} onSubmit={this.handleSubmit}>
