@@ -26,8 +26,4 @@ class Filter extends Component {
   }
 }
 
-// Filter.propTypes = {
-//   title: PropTypes.string.isRequired,
-// };
-
 export default Filter;

@@ -20,24 +20,36 @@ class App extends Component {
   };
 
   // ContactForm
-  updateAppContacts = newName => {
+  updateAppContacts = ({ name, number }) => {
     const contact = {
       id: nanoid(),
-      name: newName.name,
-      number: newName.number,
+      name,
+      number,
     };
+    // ⏫
+    // const contact = {
+    //   id: nanoid(),
+    //   name: newName.name,
+    //   number: newName.number,
+    // };
 
     this.handleUniqueListContacts(contact);
   };
 
   // FilterValue
-  handleSearch = searchValue => {
+  handleSearch = ({ filter }) => {
     this.setState({
-      filter: searchValue.filter,
+      filter,
     });
   };
 
-  // UniqueListContacts
+  // ⏫
+  // handleSearch = searchValue => {
+  //   this.setState({
+  //     filter: searchValue.filter,
+  //   });
+  // };
+
   handleUniqueListContacts(contact) {
     this.setState(() => ({
       contacts: [contact, ...uniqueContacts],
@@ -57,12 +69,10 @@ class App extends Component {
 
   deleteContact = e => {
     const contactToDelete = e.currentTarget.parentNode.firstChild.textContent;
-    // console.log(contactToDelete);
-    // console.log(this.state.contacts);
 
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(
-        todo => todo.name !== contactToDelete,
+        contact => contact.name !== contactToDelete,
       ),
     }));
   };
@@ -74,21 +84,24 @@ class App extends Component {
     // console.log('contacts', this.state.contacts);
     // console.groupEnd();
 
+    const { contacts, filter } = this.state;
+    const { updateAppContacts, handleSearch, deleteContact } = this;
+
     return (
       <>
         <Section title="Phonebook">
           <ContactForm
             stateProps={this.state}
-            updateAppContacts={this.updateAppContacts}
+            updateAppContacts={updateAppContacts}
           />
         </Section>
 
         <Section title="Contacts">
-          <Filter stateProps={this.state} handleSearch={this.handleSearch} />
+          <Filter stateProps={this.state} handleSearch={handleSearch} />
           <ContactList
-            contactName={this.state.contacts}
-            filtredValue={this.state.filter}
-            deleteContact={this.deleteContact}
+            contactName={contacts}
+            filtredValue={filter}
+            deleteContact={deleteContact}
           />
         </Section>
       </>

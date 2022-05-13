@@ -1,11 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
 function ContactList({ contactName, filtredValue, deleteContact }) {
-  // console.log(contactName);
-  // console.log(filtredValue);
-
   return (
     <ul className={s.list}>
       {contactName &&
@@ -29,9 +26,16 @@ function ContactList({ contactName, filtredValue, deleteContact }) {
   );
 }
 
-// Section.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   children: PropTypes.node,
-// };
+ContactList.propTypes = {
+  contactName: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }),
+  ),
+  filtredValue: PropTypes.string.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};
 
 export default ContactList;
