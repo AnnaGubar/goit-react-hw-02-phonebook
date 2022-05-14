@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import propTypes from 'prop-types';
 import s from './ContactForm.module.css';
 
 class ContactForm extends Component {
@@ -56,5 +56,9 @@ class ContactForm extends Component {
     );
   }
 }
+
+// ContactForm.propTypes = {
+//   handleSubmit: propTypes.func,
+// };
 
 export default ContactForm;
