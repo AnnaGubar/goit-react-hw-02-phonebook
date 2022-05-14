@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import propTypes from 'prop-types';
+import propTypes from 'prop-types';
 import s from './Filter.module.css';
 
 class Filter extends Component {
@@ -26,8 +26,8 @@ class Filter extends Component {
   }
 }
 
-// Filter.propTypes = {
-//   handleInputSearch: propTypes.func,
-// };
+Filter.propTypes = {
+  handleInputSearch: propTypes.func,
+};
 
 export default Filter;
