@@ -8,14 +8,14 @@ import ContactList from './Components/ContactList';
 class App extends Component {
   state = {
     filter: '',
-    // contacts: [],
+    contacts: [],
 
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    // contacts: [
+    //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    //   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    //   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    // ],
   };
 
   // ContactForm
@@ -76,6 +76,14 @@ class App extends Component {
     }));
   };
 
+  filterContacts = () => {
+    const { filter, contacts } = this.state;
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().trim().includes(filter),
+    );
+  };
+
   render() {
     // console.group('🔅 STATE');
     // console.log(this.state);
@@ -83,8 +91,8 @@ class App extends Component {
     // console.log('contacts', this.state.contacts);
     // console.groupEnd();
 
-    const { contacts, filter } = this.state;
-    const { updateAppContacts, handleSearch, deleteContact } = this;
+    const { updateAppContacts, handleSearch, deleteContact, filterContacts } =
+      this;
 
     return (
       <>
@@ -95,8 +103,7 @@ class App extends Component {
         <Section title="Contacts">
           <Filter stateProps={this.state} handleSearch={handleSearch} />
           <ContactList
-            contactName={contacts}
-            filtredValue={filter}
+            contactName={filterContacts()}
             deleteContact={deleteContact}
           />
         </Section>
