@@ -27,7 +27,7 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-  handleInputSearch: propTypes.func,
+  handleSearch: propTypes.func.isRequired,
 };
 
 export default Filter;
