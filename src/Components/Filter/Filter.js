@@ -28,6 +28,19 @@ class Filter extends Component {
 
 Filter.propTypes = {
   handleSearch: propTypes.func.isRequired,
+
+  stateProps: propTypes.arrayOf(
+    propTypes.shape({
+      filter: propTypes.string.isRequired,
+      contacts: propTypes.arrayOf(
+        propTypes.shape({
+          id: propTypes.string.isRequired,
+          name: propTypes.string.isRequired,
+          number: propTypes.string.isRequired,
+        }),
+      ),
+    }),
+  ),
 };
 
 export default Filter;
