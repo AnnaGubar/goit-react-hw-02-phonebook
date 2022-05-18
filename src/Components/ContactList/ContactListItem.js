@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
-function ContactListItem({ id, name, number, deleteContact }) {
+function ContactListItem({ name, number, deleteContact }) {
   return (
-    <li key={id} className={s.contact}>
+    <li className={s.contact}>
       <p>{name}</p>: <span>{number}</span>
       <button className={s.delete} type="button" onClick={deleteContact}>
         Delete
@@ -13,7 +13,6 @@ function ContactListItem({ id, name, number, deleteContact }) {
 }
 
 ContactListItem.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   deleteContact: PropTypes.func.isRequired,

@@ -26,11 +26,6 @@ class ContactForm extends Component {
   };
 
   render() {
-    // console.group('🔅 PROPS');
-    // console.log('parent', this.state);
-    // console.log('parent', this.props);
-    // console.groupEnd();
-
     return (
       <form className={s.form} onSubmit={this.handleSubmit}>
         <label className={s.name}>

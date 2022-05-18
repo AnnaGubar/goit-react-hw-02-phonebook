@@ -8,46 +8,33 @@ import ContactList from './Components/ContactList';
 class App extends Component {
   state = {
     filter: '',
-    contacts: [],
+    // contacts: [],
 
-    // contacts: [
-    //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    //   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    //   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    // ],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
   };
 
   // ContactForm
   updateAppContacts = ({ name, number }) => {
+    //   name: newName.name,
+    //   number: newName.number,
+
     const contact = {
       id: nanoid(),
       name,
       number,
     };
-    // ⏫
-    // const contact = {
-    //   id: nanoid(),
-    //   name: newName.name,
-    //   number: newName.number,
-    // };
 
     this.handleUniqueListContacts(contact);
   };
 
-  // FilterValue
-  handleSearch = ({ filter }) => {
-    this.setState({
-      filter,
-    });
+  handleSearch = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
-
-  // ⏫
-  // handleSearch = searchValue => {
-  //   this.setState({
-  //     filter: searchValue.filter,
-  //   });
-  // };
 
   handleUniqueListContacts(contact) {
     this.setState(() => ({
@@ -80,17 +67,11 @@ class App extends Component {
     const { filter, contacts } = this.state;
 
     return contacts.filter(contact =>
-      contact.name.toLowerCase().trim().includes(filter),
+      contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim()),
     );
   };
 
   render() {
-    // console.group('🔅 STATE');
-    // console.log(this.state);
-    // console.log('name', this.state.name);
-    // console.log('contacts', this.state.contacts);
-    // console.groupEnd();
-
     const { updateAppContacts, handleSearch, deleteContact, filterContacts } =
       this;
 
@@ -101,7 +82,7 @@ class App extends Component {
         </Section>
 
         <Section title="Contacts">
-          <Filter stateProps={this.state} handleSearch={handleSearch} />
+          <Filter value={this.state.filter} handleSearch={handleSearch} />
           <ContactList
             contactName={filterContacts()}
             deleteContact={deleteContact}
